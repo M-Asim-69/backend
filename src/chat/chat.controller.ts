@@ -48,7 +48,10 @@ export class ChatController {
       `[API] Message sent: id=${savedMessage.id}, sender=${senderUsername}, receiver=${receiverUsername}`,
     );
     // Emit real-time event to both sender and receiver
-    this.chatGateway.emitNewMessage(savedMessage);
+    this.chatGateway.emitNewMessage({
+      ...savedMessage,
+      timestamp: new Date(),
+    });
     return savedMessage;
   }
 
